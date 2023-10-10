@@ -16,5 +16,8 @@ The deletion or insertion is only accepted if:
 2. The corresponding insertion/deletion probability is greater than some randomly generated float in range [0, 1]
 
 Otherwise nothing happens.
-Since we start with an empty grid we need to thermalize the system first. This means we need to run the above scheme for Ntherm pseudo timesteps to make certain that the system is in thermal equilibrium. 
+Since we start with an empty grid we need to thermalise the system first. This means we need to run the above scheme for Ntherm pseudo timesteps to make certain that the system is in thermal equilibrium. 
 After this we take snapshots of the system in regular intervals to evaluate the quantities we're interested in.
+
+## Example Results
+In the directory example_results one can find the results of the simulation. final_config is a snapshot of the system for different activities at the last timestep. Here you can see the rod configuration and the different phases. The N_thermal's show the thermalisation runs for different activities. Seta shows the phase transition by looking at the order parameter |S| against the packing density.
