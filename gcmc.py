@@ -1,5 +1,5 @@
 import numpy as np
-from random import random, randint  # for faster execution
+from random import random, randint
 import time
 import concurrent.futures
 
@@ -242,7 +242,6 @@ if __name__ == '__main__':  # needed for multiprocessing to work
     list_of_N_max = [int(4e9)]*8
     list_of_N_therm = [2000000, 2000000, 5000000,
                        5000000, 6000000, 14000000, 20000000, 20000000]
-    #list_of_N_therm = [1]*8
     list_of_delta_N = [int(1e4)]*8
     M = [64]*8
     L = [8]*8
