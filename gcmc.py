@@ -234,17 +234,17 @@ def check_collision(grid, new_position, new_direction, M, L):
             return np.count_nonzero(grid[y_pos:y_pos + L, x_pos]) >= 1
 
 
-if __name__ == '__main__':  # needed for multiprocessing to work
+if __name__ == '__main__':  
 
     # -----------------------------------
     # parameters to change:
-    list_of_z = [0.05, 0.125, 0.25, 0.56, 0.86, 1.1, 1.15, 1.5]
-    list_of_N_max = [int(4e9)]*8
+    list_of_z = [0.05, 0.125, 0.25, 0.56, 0.86, 1.1, 1.15, 1.5] #activities to run the system
+    list_of_N_max = [int(4e9)]*8 # number of steps to run the simulation
     list_of_N_therm = [2000000, 2000000, 5000000,
-                       5000000, 6000000, 14000000, 20000000, 20000000]
-    list_of_delta_N = [int(1e4)]*8
-    M = [64]*8
-    L = [8]*8
+                       5000000, 6000000, 14000000, 20000000, 20000000] # number of thermalization steps(Steps to reach thermal equlibrium)
+    list_of_delta_N = [int(1e4)]*8 # number of steps the systems quantities are logged
+    M = [64]*8 #size of computational domain
+    L = [8]*8 #rodlength
     # ------------------------------------
 
     results = multiprocess(list_of_z, list_of_N_max,
