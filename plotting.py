@@ -8,12 +8,11 @@ list_of_z = [0.05, 0.125, 0.25, 0.56, 0.86, 1.1, 1.15, 1.5]
 
 def load_data(z):
     N_plus, N_minus = np.loadtxt(f'obs_{z}.csv', dtype=int)
-    #pos = np.loadtxt(f'pos_{z}.csv', dtype=int)
-    return N_plus, N_minus  # , pos
+    return N_plus, N_minus 
 
 
-# thermalization plots
-def therm(list_of_z=[0.05, 0.125, 0.25, 0.56, 0.86, 1.1, 1.15, 1.5]):
+# can be used for thermalization plots
+def history(list_of_z=[0.05, 0.125, 0.25, 0.56, 0.86, 1.1, 1.15, 1.5]):
     for z in list_of_z:
         N_plus, N_minus = load_data(z)
         N = N_plus + N_minus
@@ -24,25 +23,24 @@ def therm(list_of_z=[0.05, 0.125, 0.25, 0.56, 0.86, 1.1, 1.15, 1.5]):
         plt.plot(x, N_minus, label='$N\_$', linewidth=0.7)
         plt.plot(x, N_plus, label='$N_+$', linewidth=0.7)
         plt.legend(loc='upper right')
-        plt.title(f'Thermalisierungslauf $z={z}$')
-        plt.xlabel('Schrittanzahl')
-        plt.ylabel('Stäbchenanzahl')
+        plt.title(f'System History of $z={z}$')
+        plt.xlabel('Steps')
+        plt.ylabel('Number of Rods')
         plt.grid(zorder=-1)
         #plt.savefig(f'N_{zvar}.png', dpi=400)
         plt.show()
         plt.close()
     return 0
 
+
 # histogram plots
-
-
 def histogram():
     N_plus = []
     N_minus = []
     N = []
     S = []
-    varnames = ['Stäbchenanzahl $N_+$', 'Stäbchenanzahl $N\_$',
-                'Stäbchenanzahl $N$', 'Ordnungsparameter $S$']
+    varnames = ['Vertical rods $N_+$', 'Horizontal rods $N\_$',
+                'Number of rods $N$', 'order param $S$']
 
     # load/process data
     for z in [0.25, 0.56, 0.86, 1.1]:
@@ -165,19 +163,14 @@ def mean_error(data1, data2, k):
     return data1.mean(), data2.mean(), k*sigma1, k*sigma2
 
 
-def title_picture(z):
-    grid = np.loadtxt(f'grid_{z}.csv')
-    cmap = colors.ListedColormap(['white', 'red', 'blue'])
-    fig, ax = plt.subplots()
-    fig.set_size_inches(17/2.54, 17/2.54)
-    ax.imshow(grid, cmap=cmap)
-    ax.set_title(f'$z={z}$')
-    plt.savefig('Title.png', dpi=1000)
-    plt.close()
+#to show the count of N+ N- and N over all steps
+# therm() 
 
+#to show histograms of N+ N- and N over all step
+# histogram() 
 
-# therm()
-# histogram()
+#visualize a selection of endconfigurations of the system to get an idea of what the system looks like
 # visualize()
-# S_eta()
-# title_picture(0.56)
+
+#generate order parameter plot
+# S_eta() 
