@@ -118,20 +118,20 @@ def delete(grid, pos, Nplus, Nminus, z, M, L):
             if x_pos + L > M - 1:  # particle goes over the right border
                 grid[y_pos, x_pos:M] = 0
                 grid[y_pos, 0:(x_pos + L) % M] = 0
-                #print('horizontally outside deleted')
+                # horizontally outside deleted
             else:  # particle is completely inside boundries
                 grid[y_pos, x_pos:x_pos + L] = 0
-                #print('horizontally inside deleted')
+                # horizontally inside deleted
             Nplus -= 1
 
         if direction == 0:  # particle vertical
             if y_pos + L > M - 1:
                 grid[y_pos:M, x_pos] = 0
                 grid[0:(y_pos + L) % M, x_pos] = 0
-                #print('vertically outside deleted')
+                # vertically outside deleted
             else:
                 grid[y_pos:y_pos + L, x_pos] = 0
-                #print('vertically inside deleted')
+                # vertically inside deleted
             Nminus -= 1
 
         # delete column(chosen particle) out of pos(list of particles)
@@ -165,19 +165,16 @@ def insert(grid, pos, Nplus, Nminus, z, M, L):
                     # particle goes over the right border
                     grid[y_pos, x_pos:M] = 1
                     grid[y_pos, 0:(x_pos + L) % M] = 1
-                    #print('horizontally outside inserted')
+                    # horizontally outside inserted
 
                 else:
                     # particle is completely inside boundries
                     grid[y_pos, x_pos:x_pos + L] = 1
-                    #print('horizontally inside inserted')
+                    # horizontally inside inserted
 
                 # add inserted particle to list
                 pos.append([new_position[0], new_position[1], 1])
                 Nplus += 1
-
-            # else:
-                #print('not inserted')
 
     else:
         # vertical
@@ -189,18 +186,15 @@ def insert(grid, pos, Nplus, Nminus, z, M, L):
                     # set to two to simplyfy visualisation, the collision check works with count_nonzero so there is no difference between 1/2
                     grid[y_pos:M, x_pos] = 2
                     grid[0:(y_pos + L) % M, x_pos] = 2
-                    #print('vertically outside inserted')
+                    # vertically outside inserted
 
                 else:
                     grid[y_pos:y_pos + L, x_pos] = 2
-                    #print('vertically inside inserted')
+                    # vertically inside inserted
 
                 # add inserted particle to list
                 pos.append([new_position[0], new_position[1], 0])
                 Nminus += 1
-
-            # else:
-                #print('not inserted')
 
     return grid, pos, Nplus, Nminus
 
@@ -218,33 +212,35 @@ def check_collision(grid, new_position, new_direction, M, L):
     if new_direction == 1:
         # particle horizontal
         if x_pos + L > M - 1:  # particle goes over the right border
-            #print('horizontally outside')
+            # horizontally outside
             return np.count_nonzero(grid[y_pos, x_pos:M]) + np.count_nonzero(grid[y_pos, 0:(x_pos + L) % M]) >= 1
         else:  # particle is completely inside boundries
-            #print('horizontally inside')
+            # horizontally inside
             return np.count_nonzero(grid[y_pos, x_pos:x_pos + L]) >= 1
 
     if new_direction == 0:
         # particle vertical
         if y_pos + L > M - 1:
-            #print('vertically outside')
+            # vertically outside
             return np.count_nonzero(grid[y_pos:M, x_pos]) + np.count_nonzero(grid[0:(y_pos + L) % M, x_pos]) >= 1
         else:
-            #print('vertically inside')
+            # vertically inside
             return np.count_nonzero(grid[y_pos:y_pos + L, x_pos]) >= 1
 
 
-if __name__ == '__main__':  
+if __name__ == '__main__':
 
     # -----------------------------------
     # parameters to change:
-    list_of_z = [0.05, 0.125, 0.25, 0.56, 0.86, 1.1, 1.15, 1.5] #activities to run the system
-    list_of_N_max = [int(4e9)]*8 # number of steps to run the simulation
+    list_of_z = [0.05, 0.125, 0.25, 0.56, 0.86, 1.1,
+                 1.15, 1.5]  # activities to run the system
+    list_of_N_max = [int(4e9)]*8  # number of steps to run the simulation
     list_of_N_therm = [2000000, 2000000, 5000000,
-                       5000000, 6000000, 14000000, 20000000, 20000000] # number of thermalization steps(Steps to reach thermal equlibrium)
-    list_of_delta_N = [int(1e4)]*8 # number of steps the systems quantities are logged
-    M = [64]*8 #size of computational domain
-    L = [8]*8 #rodlength
+                       5000000, 6000000, 14000000, 20000000, 20000000]  # number of thermalization steps(Steps to reach thermal equlibrium)
+    # number of steps after which the systems quantities are logged
+    list_of_delta_N = [int(1e4)]*8
+    M = [64]*8  # size of computational domain
+    L = [8]*8  # rodlength
     # ------------------------------------
 
     results = multiprocess(list_of_z, list_of_N_max,
@@ -256,4 +252,3 @@ if __name__ == '__main__':
         np.savetxt(f'grid_{z}.csv', grid)
         np.savetxt(f'pos_{z}.csv', pos)
         np.savetxt(f'obs_{z}.csv', (N_plus, N_minus))
-
