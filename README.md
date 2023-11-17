@@ -24,10 +24,16 @@ The deletion or insertion is only accepted if:
 Otherwise nothing happens.
 
 
-Since we start with an empty grid we need to thermalise the system first. This means we need to run the above scheme for Ntherm pseudo timesteps to make certain that the system is in thermal equilibrium. 
-After this we take snapshots of the system in regular intervals to evaluate the quantities we're interested in.
+Since we start with an empty grid we need to thermalize the system first. This means we need to run the above scheme for Ntherm pseudo timesteps to make certain that the system is in thermal equilibrium. 
+After this we take snapshots of the system in regular intervals to evaluate the quantities we're interested in. In the given code the number of thermalization steps for the given activities are already preadjusted, so no thermaization is needed.
 
-To visualize the system, plotting.py can be executed after commenting in the functions you are interested in.
+To visualize the system, plotting.py can be executed after commenting in the functions you are interested in. For an idea what the different functions produce, refer to the example_result directory.
 
 ## Example Results
-In the directory example_results one can find the results of the simulation. Endkonfig is a snapshot of the system for different activities at the last timestep. Here you can see the rod configuration and the different phases. The N_thermal's show the thermalisation runs for different activities. Seta shows the phase transition by looking at the order parameter |S| against the packing density.
+In the directory example_results one can find plots showing different aspects of the simulation results. 
+
+Endkonfig is a snapshot of the system for different activities at the last timestep. Here you can see the rod configuration and the different phases. 
+
+The N_thermal's show the thermalisation runs for different activities, generated in a previous run. 
+
+Seta shows the phase transition as the activity increases by looking at the order parameter |S| against the packing density.
