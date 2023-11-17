@@ -4,7 +4,9 @@ Code to perform a grand canonical monte carlo simulation of a system of hard rod
 ## Features
 Monte Carlo Insertion and Deletion with physically motivated probability
 
+
 Multiprocessing capabilities for faster simulation execution
+
 
 Reliance on numpy build-in functions and data structures for faster execution
 
@@ -20,6 +22,7 @@ The deletion or insertion is only accepted if:
 2. The corresponding insertion/deletion probability is greater than some randomly generated float in range [0, 1]
 
 Otherwise nothing happens.
+
 
 Since we start with an empty grid we need to thermalise the system first. This means we need to run the above scheme for Ntherm pseudo timesteps to make certain that the system is in thermal equilibrium. 
 After this we take snapshots of the system in regular intervals to evaluate the quantities we're interested in.
